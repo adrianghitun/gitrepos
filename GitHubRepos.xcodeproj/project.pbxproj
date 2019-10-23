@@ -20,6 +20,7 @@
 		3F444C682360EB250088086E /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F444C672360EB250088086E /* Repository.swift */; };
 		3F444C6C2360EFAF0088086E /* RepositoryCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F444C6B2360EFAF0088086E /* RepositoryCellViewModel.swift */; };
 		3F444C6E2360F0450088086E /* RepositoriesViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F444C6D2360F0450088086E /* RepositoriesViewModelTests.swift */; };
+		3F444C702360F70D0088086E /* String+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F444C6F2360F70D0088086E /* String+Utils.swift */; };
 		3F546FD7235E556500546F9F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F546FD6235E556500546F9F /* AppDelegate.swift */; };
 		3F546FDB235E556500546F9F /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F546FDA235E556500546F9F /* LoginViewController.swift */; };
 		3F546FDE235E556500546F9F /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F546FDC235E556500546F9F /* Login.storyboard */; };
@@ -64,6 +65,7 @@
 		3F444C672360EB250088086E /* Repository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Repository.swift; sourceTree = "<group>"; };
 		3F444C6B2360EFAF0088086E /* RepositoryCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryCellViewModel.swift; sourceTree = "<group>"; };
 		3F444C6D2360F0450088086E /* RepositoriesViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoriesViewModelTests.swift; sourceTree = "<group>"; };
+		3F444C6F2360F70D0088086E /* String+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Utils.swift"; sourceTree = "<group>"; };
 		3F546FD3235E556500546F9F /* GitHubRepos.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GitHubRepos.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F546FD6235E556500546F9F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3F546FDA235E556500546F9F /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -319,9 +321,10 @@
 		3FB247CF235F8D7A0029B12B /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				3FB247D0235F8D860029B12B /* UIWindow+Utils.swift */,
 				3FB247D2235F8DB00029B12B /* Constants.swift */,
+				3FB247D0235F8D860029B12B /* UIWindow+Utils.swift */,
 				3F444C48235FA2810088086E /* URL+Utils.swift */,
+				3F444C6F2360F70D0088086E /* String+Utils.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -551,6 +554,7 @@
 				3F444C4C235FAB3E0088086E /* AuthenticationService.swift in Sources */,
 				3F444C622360D8EC0088086E /* RepositoryTableViewCell.swift in Sources */,
 				3FB247C9235F80B50029B12B /* AppFlowCoordinator.swift in Sources */,
+				3F444C702360F70D0088086E /* String+Utils.swift in Sources */,
 				3FB247DE235F9B1F0029B12B /* LoginCoordinator.swift in Sources */,
 				3F444C5D2360C1140088086E /* RepositoriesViewModel.swift in Sources */,
 				3F444C652360E3680088086E /* ImageDownloader.swift in Sources */,
