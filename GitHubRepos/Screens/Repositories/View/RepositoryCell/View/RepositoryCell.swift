@@ -9,23 +9,24 @@
 import Foundation
 import UIKit
 
-class RepositoryTableViewCell: UITableViewCell {
-
+class RepositoryCell: TableCell {
+    class override var nibFile: String? {
+        return reuseIdentifier
+    }
+    
     @IBOutlet weak var profileImageview: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
 
-    var viewModel: RepositoryCellViewModel? {
-        didSet {
-            setupView()
-        }
+    var repositoryViewModel: RepositoryCellViewModel? {
+        viewModel as? RepositoryCellViewModel
     }
+    
+    override func setupContent() {
+        titleLabel.text = repositoryViewModel?.title
+        descriptionLabel.text = repositoryViewModel?.description
 
-    func setupView() {
-        titleLabel.text = viewModel?.title
-        descriptionLabel.text = viewModel?.description
-
-        viewModel?.image(completion: { [weak self] (image) in
+        repositoryViewModel?.image(completion: { [weak self] (image) in
             if let image = image as? UIImage {
                 self?.profileImageview.image = image
             }

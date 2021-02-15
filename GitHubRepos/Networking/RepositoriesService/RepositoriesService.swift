@@ -10,7 +10,7 @@ import Foundation
 
 class RepositoriesService {
     private var service: BaseServiceProtocol
-    static let path: String = "search/repositories"
+    private let path: String = "search/repositories"
 
     init(service: BaseServiceProtocol) {
         self.service = service
@@ -24,7 +24,7 @@ class RepositoriesService {
             "per_page":"10"
         ]
         
-        service.get(path: RepositoriesService.path, parameters: parameters) { (response: Result<RepositoryQuery, Error>) in
+        service.get(path: self.path, parameters: parameters) { (response: Result<QueryResult<Repository>, Error>) in
             if case .success(let query) = response {
                 completion(query.items)
             } else {

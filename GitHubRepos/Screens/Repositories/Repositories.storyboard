@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="kr1-pI-SIC">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Top Swift Repos-->
+        <scene sceneID="IoH-BM-Kd7">
+            <objects>
+                <viewController storyboardIdentifier="RepositoriesViewController" title="Top Swift Repos" id="kr1-pI-SIC" customClass="RepositoriesViewController" customModule="GitHubRepos" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="pOy-Ag-mex">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="N7h-Dd-9F3">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="kr1-pI-SIC" id="qsq-bh-lfV"/>
+                                    <outlet property="delegate" destination="kr1-pI-SIC" id="MK5-kS-fFT"/>
+                                </connections>
+                            </tableView>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="b6F-j4-Rcy">
+                                <rect key="frame" x="188.5" y="434.5" width="37" height="37"/>
+                                <color key="color" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </activityIndicatorView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="0gj-QP-FEq"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="N7h-Dd-9F3" firstAttribute="trailing" secondItem="0gj-QP-FEq" secondAttribute="trailing" id="VJ3-6Y-GUf"/>
+                            <constraint firstItem="N7h-Dd-9F3" firstAttribute="top" secondItem="0gj-QP-FEq" secondAttribute="top" id="hLi-FM-1aP"/>
+                            <constraint firstItem="N7h-Dd-9F3" firstAttribute="bottom" secondItem="0gj-QP-FEq" secondAttribute="bottom" id="hkK-74-1Zh"/>
+                            <constraint firstItem="N7h-Dd-9F3" firstAttribute="leading" secondItem="0gj-QP-FEq" secondAttribute="leading" id="qc2-n0-K3s"/>
+                            <constraint firstItem="b6F-j4-Rcy" firstAttribute="centerX" secondItem="0gj-QP-FEq" secondAttribute="centerX" id="vAY-jQ-RNU"/>
+                            <constraint firstItem="b6F-j4-Rcy" firstAttribute="centerY" secondItem="0gj-QP-FEq" secondAttribute="centerY" id="xfC-rW-q6D"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="activityIndicator" destination="b6F-j4-Rcy" id="kMt-Rk-OnW"/>
+                        <outlet property="tableView" destination="N7h-Dd-9F3" id="ql7-9g-E0U"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pzr-uG-nba" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="134.78260869565219" y="174.77678571428569"/>
+        </scene>
+        <!--Repo-->
+        <scene sceneID="1pp-gB-oR2">
+            <objects>
+                <viewController storyboardIdentifier="RepositoryDetailsViewController" title="Repo" id="wuh-mr-DoT" customClass="RepositoryDetailsViewController" customModule="GitHubRepos" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="np3-eU-vq2">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="HYO-wi-3FA">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="wuh-mr-DoT" id="fBi-PG-XEO"/>
+                                    <outlet property="delegate" destination="wuh-mr-DoT" id="KbT-wU-GZ5"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Pvs-3A-9bz"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="HYO-wi-3FA" firstAttribute="trailing" secondItem="Pvs-3A-9bz" secondAttribute="trailing" id="2HO-Eu-Qs0"/>
+                            <constraint firstItem="HYO-wi-3FA" firstAttribute="leading" secondItem="Pvs-3A-9bz" secondAttribute="leading" id="39a-zM-7oS"/>
+                            <constraint firstItem="HYO-wi-3FA" firstAttribute="top" secondItem="Pvs-3A-9bz" secondAttribute="top" id="5Fm-d6-FSJ"/>
+                            <constraint firstItem="HYO-wi-3FA" firstAttribute="bottom" secondItem="Pvs-3A-9bz" secondAttribute="bottom" id="YUV-pc-Ld0"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="HYO-wi-3FA" id="sRo-Wx-VSx"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4N2-JC-6KR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1250.7246376811595" y="174.77678571428569"/>
+        </scene>
+    </scenes>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

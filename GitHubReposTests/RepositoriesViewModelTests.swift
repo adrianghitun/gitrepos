@@ -15,41 +15,50 @@ class RepositoriesViewModelTests: XCTestCase {
     override func setUp() {
         let mockedRepoService = MockedRepositoryService()
         let mockedImageDownloader = MockedImageDownloader()
-        viewModel = RepositoriesViewModel(service: RepositoriesService(service: mockedRepoService), imageDownloader: mockedImageDownloader)
+        viewModel = RepositoriesViewModel(service: RepositoriesService(service: mockedRepoService),
+                                          imageProvider: mockedImageDownloader)
         viewModel?.loadRepositories()
+        
+        let exp = XCTestExpectation()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.1) {
+            exp.fulfill()
+        }
+        
+        wait(for: [exp], timeout: 2)
     }
 
     func testNumberOfItems() {
-        XCTAssertEqual(viewModel!.numberOfItems, 3)
+        XCTAssertEqual(viewModel!.numberOfSections, 1)
     }
 
     func testFirstItemDescription() {
-        XCTAssertEqual(viewModel!.item(for: 0).description, "description1")
+        XCTAssertEqual(viewModel!.item(at: IndexPath(row: 0, section: 0)).content, "description3")
     }
 
     func testDelegateCallbacks() {
         let delegate = RepositoriesLoadDelegate()
-        viewModel?.delegate = delegate
+        viewModel?.dataStateBinding = delegate
 
-        XCTAssertEqual(delegate.didFinish, false)
-        XCTAssertEqual(delegate.didUpdate, false)
 
         viewModel?.loadRepositories()
-
-        XCTAssertEqual(delegate.didFinish, true)
-        XCTAssertEqual(delegate.didUpdate, true)
+        XCTAssertEqual(delegate.state, .loading)
+        
+        let exp = XCTestExpectation()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.1) {
+            exp.fulfill()
+        }
+        
+        wait(for: [exp], timeout: 2)
+        
+        XCTAssertEqual(delegate.state, .loaded)
     }
 }
 
-class RepositoriesLoadDelegate: RepositoriesViewModelDelegate {
-    var didFinish = false
-    func didFinishLoading() {
-        didFinish = true
-    }
-
-    var didUpdate = false
-    func didUpdateDatasource() {
-        didUpdate = true
+class RepositoriesLoadDelegate: DataStateBindingProtocol {
+    var state: DataState?
+    
+    func dataStateDidChanged(_ state: DataState) {
+        self.state = state
     }
 }
 
@@ -61,16 +70,18 @@ class MockedRepositoryService: BaseServiceProtocol {
     ]
 
     func get<T: Decodable>(baseUrl: URL?, path: String, parameters: [String: String], completion: @escaping ((Swift.Result<T, Error>) -> Void)) {
-        guard let response = RepositoryQuery(items: dummyRepos) as? T else {
+        guard let response = QueryResult<Repository>(items: dummyRepos) as? T else {
             assertionFailure("invalid mock")
             return
         }
-        completion(Result.success(response))
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            completion(Result.success(response))
+        }
     }
 }
 
-class MockedImageDownloader: ImageDownloaderProtocol {
-    func image(for url: URL, completion: @escaping (Any?) -> Void) {
+class MockedImageDownloader: RepositoryImageProviderProtocol {
+    func image(for repository: Repository, completion: @escaping (Any?) -> Void) {
         completion(nil)
     }
 }

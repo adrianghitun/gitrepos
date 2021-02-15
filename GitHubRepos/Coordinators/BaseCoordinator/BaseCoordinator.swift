@@ -106,23 +106,3 @@ protocol ControllerDeinitHandler: class {
 protocol ControllerDeinitReportable: UIViewController {
     var deinitDelegate: ControllerDeinitHandler? {get set}
 }
-
-// MARK: Coordinated Controllers
-
-/*
-When the root view controller deinits, we should release the coordinator holding it. 
-*/
-class CoordinatedViewController: UIViewController, ControllerDeinitReportable {
-    weak var deinitDelegate: ControllerDeinitHandler?
-    deinit {
-        deinitDelegate?.didDeinit(controller: self)
-    }
-}
-
-
-class CoordinatedNavigationViewController: UINavigationController, ControllerDeinitReportable {
-    weak var deinitDelegate: ControllerDeinitHandler?
-    deinit {
-        deinitDelegate?.didDeinit(controller: self)
-    }
-}

@@ -10,14 +10,14 @@ import Foundation
 
 class AuthenticationService {
     private var service: BaseService
-    static let path: String = "login/oauth"
+    private let path: String = "login/oauth"
 
     init(service: BaseService) {
         self.service = service
     }
 
     func authenticate(with code: String, completion: @escaping (Bool) -> Void) {
-        let fullPath = AuthenticationService.path + "/access_token"
+        let fullPath = self.path + "/access_token"
             let parameters = [
                 "client_id" : Constants.GitHubOAuth.clientId,
                 "client_secret" : Constants.GitHubOAuth.clientSecret,

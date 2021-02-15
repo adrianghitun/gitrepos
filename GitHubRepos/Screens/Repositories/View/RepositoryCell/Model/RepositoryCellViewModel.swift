@@ -12,7 +12,7 @@ protocol RepositoryImageProviderProtocol: class {
     func image(for repository: Repository, completion: @escaping (Any?) -> Void)
 }
 
-class RepositoryCellViewModel {
+class RepositoryCellViewModel: TableCellViewModel {    
     let model: Repository
     weak var imageProvider: RepositoryImageProviderProtocol?
 
@@ -22,6 +22,10 @@ class RepositoryCellViewModel {
 
     var title: String {
         return "⭑\(model.stars)\n" + model.name
+    }
+    
+    var content: String {
+        return description
     }
 
     var description: String {

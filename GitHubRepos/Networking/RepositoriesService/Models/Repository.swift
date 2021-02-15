@@ -8,10 +8,6 @@
 
 import Foundation
 
-struct RepositoryQuery: Decodable {
-    var items: [Repository]
-}
-
 struct Owner: Decodable {
     var login: String
     var avatarPath: String

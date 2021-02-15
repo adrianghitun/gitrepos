@@ -9,51 +9,34 @@
 import Foundation
 import UIKit
 
-class RepositoriesViewController: CoordinatedViewController {
+class RepositoriesViewController: CoordinatedTableViewController {
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
-    @IBOutlet weak var tableView: UITableView!
 
-    var viewModel: RepositoriesViewModel? {
-        didSet {
-            viewModel?.delegate = self
-        }
+    override var cellMappings: [HashableType : UITableViewCell.Type] {
+                [HashableType(RepositoryCellViewModel.self): RepositoryCell.self]
+    }
+    
+    var repositoriesViewModel: RepositoriesViewModel? {
+        return viewModel as? RepositoriesViewModel
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTableView()
-
-        activityIndicator.startAnimating()
-        viewModel?.loadRepositories()
+        repositoriesViewModel?.loadRepositories()
     }
 
     func setupTableView() {
-        tableView.dataSource = self
         tableView.tableFooterView = UIView()
     }
-}
-
-extension RepositoriesViewController: RepositoriesViewModelDelegate {
-    func didUpdateDatasource() {
-        tableView.reloadSections(IndexSet(integer: 0), with: .fade)
-    }
-
-    func didFinishLoading() {
-        activityIndicator.stopAnimating()
-    }
-}
-
-extension RepositoriesViewController: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel?.numberOfItems ?? 0
-    }
-
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        var cell = tableView.dequeueReusableCell(withIdentifier: "repositoryCell", for: indexPath)
-        if let repositoryCell = cell  as? RepositoryTableViewCell {
-            repositoryCell.viewModel = viewModel?.item(for: indexPath.row)
-            cell = repositoryCell
+    
+    override func dataStateDidChanged(_ state: DataState) {
+        switch state {
+        case .initialising, .loading:
+            activityIndicator?.startAnimating()
+        case .loaded:
+            activityIndicator?.stopAnimating()
+            tableView?.reloadData()
         }
-        return cell
     }
 }
